@@ -26,24 +26,14 @@ app.use(
   }),
 );
 
-// app.get('/notes/:noteId', (req, res) => {
-//   const { noteId } = req.params;
-//   res.status(200).json({ message: `Retrieved note with ID: ${noteId}` });
-// });
-
-app.use((req, res, next) => {
-  console.log(`New request: ${req.method} ${req.url}`);
-  next();
-});
-
 app.use(notesRoutes);
 
-app.use(errorHandler);
-
 app.use(notFoundHandler);
+
+app.use(errorHandler);
 
 await connectMongoDB();
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
