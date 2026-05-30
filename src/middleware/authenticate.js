@@ -9,7 +9,7 @@ export const authenticate = async (req, res, next) => {
     throw createHttpError(401, 'Missing access token');
   }
 
-  const session = Session.findOne({ _id: sessionId, accessToken });
+  const session = await Session.findOne({ _id: sessionId, accessToken });
   if (!session) {
     throw createHttpError(401, 'Session not found');
   }
