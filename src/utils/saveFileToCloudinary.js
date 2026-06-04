@@ -9,7 +9,7 @@ cloudinary.config({
 
 export async function saveFileToCloudinary(buffer, userId) {
   const options = {
-    folder: 'students-app/avatars',
+    folder: 'notes-app/avatars',
     public_id: `avatar_${userId}`,
     resource_type: 'image',
     overwrite: true,
