@@ -8,7 +8,7 @@ import fs from 'node:fs/promises';
 import { User } from '../models/user.js';
 import { createSession, setSessionCookies } from '../services/auth.js';
 import { Session } from '../models/session.js';
-import { sendMail } from '../utils/sendMail.js';
+import { sendEmail } from '../utils/sendMail.js';
 
 export const registerUser = async (req, res) => {
   const { email, password } = req.body;
@@ -110,8 +110,8 @@ export const requestResetEmail = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    return res(200).json({
-      message: 'Password reset email NOT sent successfully',
+    return res.status(200).json({
+      message: 'Password reset email sent successfully',
     });
   }
 
@@ -130,7 +130,7 @@ export const requestResetEmail = async (req, res) => {
   });
 
   try {
-    await sendMail({
+    await sendEmail({
       from: process.env.SMTP_FROM,
       to: email,
       subject: 'Reset your password',
